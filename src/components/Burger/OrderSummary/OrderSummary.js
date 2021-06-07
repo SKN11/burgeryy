@@ -1,6 +1,8 @@
 import React from 'react'
 import Aux from '../../../hoc/Auxilliary/Auxilliary';
 import Button from '../../../UI/Button/Button';
+import Checkout from '../../../containers/Checkout/Checkout'
+import {Route,Link} from 'react-router-dom'
 
 
 const OrderSummary = (props) => {
@@ -23,8 +25,18 @@ const OrderSummary = (props) => {
             <ul>{billIngredients}</ul>
             <p><strong>Total Price : {props.price.toFixed(2)}</strong></p>
             <p>Continue To Checkout ?</p>
-            <Button clicked={props.purchaseCancelled} btnType={'Danger'}>CANCEL</Button>
-            <Button clicked={props.purchaseContinued} btnType={'Success'}>CONTINUE</Button>
+            
+            <Button 
+            clicked={props.purchaseCancelled}
+             btnType={'Danger'}
+             >CANCEL</Button>
+            
+            <Button 
+            clicked={props.purchaseContinued} 
+            btnType={'Success'}
+            >CONTINUE</Button>
+            
+            <Route path='/checkout' exact component={Checkout}/>
             
         </Aux>
     );

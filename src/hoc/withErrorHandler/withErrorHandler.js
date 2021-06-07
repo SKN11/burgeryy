@@ -7,15 +7,15 @@ const withErrorHandler = (WrappedComponent,axios) => {
         state = {
             error : null
         }
-        componentDidMount(){
-            axios.interceptors.request.use(req  =>{
+        componentWillMount(){
+            this.req = axios.interceptors.request.use(req  =>{
                 this.setState({
                     error:null
                 });
                 return req;
             });
 
-            axios.interceptors.response.use(res  => res,error=>{
+            this.res = axios.interceptors.response.use(res  => res,error=>{
                 console.log("got error in response");
                 console.log(error);
                 this.setState({
@@ -23,6 +23,12 @@ const withErrorHandler = (WrappedComponent,axios) => {
                 });
             });
 
+        }
+
+        componentWillUnMount = () => { //this method executed last when compoennt removed from dom
+            //it ensures no data leak when componenet is removed from the dom
+            axios.interceptors.request.eject(this.req);
+            axios.interceptors.response.eject(this.res);
         }
 
         errorHandledByBackdrop =() => {

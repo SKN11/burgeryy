@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 const instance = axios.create({
-    baseURL : 'https://burgeryy-base-default-rtdb.firebaseio.com/'
+    baseURL : 'https://burgery-bas2-default-rtdb.firebaseio.com/'
 })
 
 
